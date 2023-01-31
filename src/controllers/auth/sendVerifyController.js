@@ -1,4 +1,4 @@
-const { sendVerifyService } = require("../../services/authService");
+const { sendVerifyService } = require("../../services/email");
 
 const sendVerifyController = async (req, res) => {
   const { email } = req.body;

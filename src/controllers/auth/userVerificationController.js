@@ -1,4 +1,4 @@
-const { userVerificationService } = require("../../services/authService");
+const { userVerificationService } = require("../../services/email");
 
 const userVerificationController = async (req, res) => {
   const { verificationToken } = req.params;
