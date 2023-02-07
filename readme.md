@@ -6,10 +6,10 @@ This is a public REST API for controlling your phone book. To implement this pro
 
 ---
 
-PORT= Port for server run
-JWT_SECRET= Any string to encode the token
-DATABASE_URL= A link to connect to a mongoDB database
-EMAIL= Mail for sending letters using Nodemailer
+PORT= Port for server run  
+JWT_SECRET= Any string to encode the token  
+DATABASE_URL= A link to connect to a mongoDB database  
+EMAIL= Mail for sending letters using Nodemailer  
 PASSWORD= Email password
 
 # Pathes
@@ -26,7 +26,9 @@ PASSWORD= Email password
 
 **_@ POST /api/users/register_**
 
-```json
+To register a user, you need to submit the email and password fields in the request. Email and password is required!
+
+```sh
     Content-Type: application/json
     RequestBody: {
     "email": "example@example.com",
@@ -36,7 +38,7 @@ PASSWORD= Email password
 
 **Registration validation error**
 
-```json
+```sh
     Status: 400 Bad Request
     Content-Type: application/json
     ResponseBody: <Joi validation error>
@@ -44,7 +46,7 @@ PASSWORD= Email password
 
 **Registration conflict error**
 
-```json
+```sh
     Status: 409 Conflict
     Content-Type: application/json
     ResponseBody: {
@@ -54,7 +56,7 @@ PASSWORD= Email password
 
 **Registration success response**
 
-```json
+```sh
     Status: 201 Created
     Content-Type: application/json
     ResponseBody: {
@@ -73,7 +75,9 @@ PASSWORD= Email password
 
 **_@ GET /api/users/login_**
 
-```json
+To login a user, you need to submit the email and password fields in the request. Email and password is required!
+
+```sh
     Content-Type: application/json
     RequestBody: {
     "email": "example@example.com",
@@ -83,7 +87,7 @@ PASSWORD= Email password
 
 **Login validation error**
 
-```json
+```sh
     Status: 400 Bad Request
     Content-Type: application/json
     ResponseBody: <Joi validatoin error>
@@ -91,7 +95,7 @@ PASSWORD= Email password
 
 **Login verification error**
 
-```json
+```sh
     Status: 400 Bad Request
     Content-Type: application/json
     ResponseBody: {
@@ -101,7 +105,7 @@ PASSWORD= Email password
 
 **Login success response**
 
-```json
+```sh
     Status: 200 OK
     Content-Type: application/json
     ResponseBody: {
@@ -115,7 +119,7 @@ PASSWORD= Email password
 
 **Login auth error**
 
-```json
+```sh
     Status: 401 Unauthorized
     ResponseBody: {
     "message": "Email or password is wrong"
@@ -126,17 +130,19 @@ PASSWORD= Email password
 
 ---
 
-**Logout request**
-
 **_@ POST /api/users/logout_**
 
-```json
+**Logout request**
+
+To log a user out, you only need to pass the token in the authorization header
+
+```sh
     Authorization: "Bearer {{token}}"
 ```
 
 **Logout unauthorized error**
 
-```json
+```sh
     Status: 401 Unauthorized
     Content-Type: application/json
     ResponseBody: {
@@ -146,7 +152,7 @@ PASSWORD= Email password
 
 **Logout success response**
 
-```json
+```sh
     Status: 204 No Content
 ```
 
@@ -157,13 +163,13 @@ PASSWORD= Email password
 **Current user request**
 **_@ GET /api/users/current_**
 
-```json
+```sh
     Authorization: "Bearer {{token}}"
 ```
 
 **Current user unauthorized error**
 
-```json
+```sh
     Status: 401 Unauthorized
     Content-Type: application/json
     ResponseBody: {
@@ -173,7 +179,7 @@ PASSWORD= Email password
 
 **Current user success response**
 
-```json
+```sh
     Status: 200 OK
     Content-Type: application/json
     ResponseBody: {
@@ -189,7 +195,7 @@ PASSWORD= Email password
 **_@ PATCH /api/users_**
 **Update subscription request**
 
-```json
+```sh
     Authorization: "Bearer {{token}}"
     Content-Type: application/json
     RequestBody: {
@@ -199,7 +205,7 @@ PASSWORD= Email password
 
 **Update subscription unauthorized error**
 
-```json
+```sh
     Status: 401 Unauthorized
     Content-Type: application/json
     ResponseBody: {
@@ -209,7 +215,7 @@ PASSWORD= Email password
 
 **Update subscription validation error**
 
-```json
+```sh
     Status: 400 Bad Request
     Content-Type: application/json
     ResponseBody: <Joi validatoin error>
@@ -217,7 +223,7 @@ PASSWORD= Email password
 
 **Update subscription success response**
 
-```json
+```sh
     Status: 200 OK
     Content-Type: application/json
     ResponseBody: {
@@ -240,7 +246,7 @@ PASSWORD= Email password
 **_@ PATCH /api/users/avatars_**
 **Update avatar request**
 
-```json
+```sh
 Content-Type: multipart/form-data
 Authorization: "Bearer {{token}}"
 RequestBody: uploaded file
@@ -248,7 +254,7 @@ RequestBody: uploaded file
 
 **Update avatar unauthorized error**
 
-```json
+```sh
     Status: 401 Unauthorized
     Content-Type: application/json
     ResponseBody: {
@@ -258,7 +264,7 @@ RequestBody: uploaded file
 
 **Update avatar success response**
 
-```json
+```sh
     Status: 200 OK
     Content-Type: application/json
     ResponseBody: {
@@ -274,7 +280,7 @@ RequestBody: uploaded file
 
 **Verification request**
 
-```json
+```sh
     Request parameter: {
     "verificationToken": "string",
     }
@@ -282,7 +288,7 @@ RequestBody: uploaded file
 
 **Verification user Not Found**
 
-```json
+```sh
     Status: 404 Not Found
     ResponseBody: {
     "message": "User not found"
@@ -291,7 +297,7 @@ RequestBody: uploaded file
 
 **Verification success response**
 
-```json
+```sh
     Status: 200 OK
     ResponseBody: {
     "message": "Verification successful"
@@ -306,7 +312,7 @@ RequestBody: uploaded file
 
 **Resending a email request**
 
-```json
+```sh
     Content-Type: application/json
     RequestBody: {
     "email": "example@example.com"
@@ -323,7 +329,7 @@ RequestBody: uploaded file
 
 **Resend email for verified user**
 
-```json
+```sh
     Status: 400 Bad Request
     Content-Type: application/json
     ResponseBody: {
@@ -333,7 +339,7 @@ RequestBody: uploaded file
 
 **Resending a email success response**
 
-```json
+```sh
     Status: 200 Ok
     Content-Type: application/json
     ResponseBody: {
@@ -347,7 +353,7 @@ RequestBody: uploaded file
 
 **All CRUD operations require that the user be authorized. If the user is not authorized, we will receive an error in the response**
 
-```json
+```sh
     Status: 401 Unauthorized
     Content-Type: application/json
     ResponseBody: {
@@ -362,13 +368,13 @@ RequestBody: uploaded file
 **_@ GET /api/contacts_**
 **Get contacts request**
 
-```json
+```sh
 Request body: No content
 ```
 
 **Get contacts success response**
 
-```json
+```sh
     Status: 200 Ok
     Content-Type: application/json
     ResponseBody: [ "array of contacts of current user"]
@@ -382,7 +388,7 @@ Request body: No content
 
 **Get contact by ID request**
 
-```json
+```sh
     Request parameter: {
     "id": "string",
     }
@@ -390,8 +396,8 @@ Request body: No content
 
 **Get contact by ID error response**
 
-```json
-    Status: 400 Bad Request
+```sh
+    Status: 404 Not Found
     Content-Type: application/json
     ResponseBody: {
     "message": "Not found"
@@ -400,8 +406,8 @@ Request body: No content
 
 **Get contact by ID success response**
 
-```json
-    Status: 200 Bad Request
+```sh
+    Status: 200 Ok
     Content-Type: application/json
     ResponseBody: {
     "contact"
@@ -414,31 +420,183 @@ Request body: No content
 
 **_@ POST /api/contacts_**
 
-- Отримує body в форматі {name, email, phone} (усі поля обов'язкові)
-- Якщо в body немає якихось обов'язкових полів, повертає json з ключем {"message": "missing required name field"} і статусом 400
-- За результатом роботи функції повертає об'єкт з доданим id {id, name, email, phone} і статусом 201
+**Create contact request**
+
+```sh
+    Content-Type: application/json
+    Authorization: "Bearer {{token}}"
+    RequestBody: {
+    "name":"example",
+    "email": "example@example.com",
+    "phone":"(099) 777-77-77"
+    }
+```
+
+**Create contact error response**
+
+```sh
+    Status: 400 Bad Request
+    Content-Type: application/json
+    ResponseBody: {
+    "message": <Validation error message>
+    }
+```
+
+**Create contact success response**
+
+```sh
+    Status: 201 Created
+    Content-Type: application/json
+    ResponseBody: {
+    "_id":"contactID",
+    "name":"example",
+    "email": "example@example.com",
+    "phone":"(099) 777-77-77",
+    "favorite":false
+    }
+```
+
+### Delete contact
+
+---
 
 **_@ DELETE /api/contacts/:id_**
 
-- Не отримує body
-- Отримує параметр id
-- Повертає json формату {"message": "contact deleted"} і статусом 200
-  якщо такого id немає, повертає json з ключем "message": "Not found" і статусом 404
+**Delete contact request**
+
+```sh
+    Authorization: "Bearer {{token}}"
+    Request parameter: {
+    "id": "string",
+    }
+```
+
+**Delete contact error response**
+
+```sh
+    Status: 404 Not Found
+    Content-Type: application/json
+    ResponseBody: {
+    "message": "Not found"
+    }
+```
+
+**Delete contact success response**
+
+```sh
+    Status: 200 Ok
+    Content-Type: application/json
+    ResponseBody: {
+    “message”: “contact deleted”
+    }
+```
+
+### Update contact
+
+---
 
 **_@ PUT /api/contacts/:id_**
+**Update contact request**
+(One of name, email, phone in request body is required)
 
-- Отримує параметр id
-- Отримує body в json-форматі c оновленням будь-яких полів name, email и phone
-- Якщо body немає, повертає json з ключем {"message": "missing fields"} і статусом 400
-- За результатом роботи функції повертає оновлений об'єкт контакту і статусом 200. В іншому випадку, повертає json з ключем "message": "Not found" і статусом 404
+```sh
+    Authorization: "Bearer {{token}}"
+    Request parameter: {
+    "id": "string",
+    }
+    Request body: {
+        "phone":"(099) 888-99-00"
+    }
+```
+
+**Update contact validation error response**
+
+```sh
+    Status: 400 Bad Request
+    Content-Type: application/json
+    ResponseBody: {
+    "message": <Validation error message>
+    }
+```
+
+**Update contact error response**
+
+```sh
+    Status: 404 Not Found
+    Content-Type: application/json
+    ResponseBody: {
+    "message": "Not found"
+    }
+```
+
+**Update contact success response**
+
+```sh
+    Status: 200 Ok
+    Content-Type: application/json
+    ResponseBody: {
+    "_id":"contactID",
+    "name":"example",
+    "email": "example@example.com",
+    "phone":"(099) 888-99-00",
+    "favorite":false
+    }
+```
+
+### Update favorite status
 
 **_@ PATCH /api/contacts/:contactId/favorite_**
 
-- Отримує параметр contactId
-- Отримує body в json-форматі c оновленням поля favorite
-- Якщо body немає, повертає json з ключем {"message": "missing field favorite"}і статусом 400
-- За результатом роботи функції повертає оновлений об'єкт контакту і статусом 200. В іншому випадку, повертає json з ключем " message ":" Not found " і статусом 404
+**Update favorite status request**
+(Favorite in request body is required)
 
-### Зроблено пагінацію для колекції контактів (**_GET /contacts?page=1&limit=20_**).
+```sh
+    Authorization: "Bearer {{token}}"
+    Request parameter: {
+    "id": "string",
+    }
+    Request body: {
+        "favorite":true
+    }
+```
 
-### Зроблено фільтрацію контактів по полю обраного (**_GET /contacts?favorite=true_**)
+**Update favorite status validation error response**
+
+```sh
+    Status: 400 Bad Request
+    Content-Type: application/json
+    ResponseBody: {
+    "message": <Validation error message>
+    }
+```
+
+**Update favorite status error response**
+
+```sh
+    Status: 404 Not Found
+    Content-Type: application/json
+    ResponseBody: {
+    "message": "Not found"
+    }
+```
+
+**Update favorite status success response**
+
+```sh
+    Status: 200 Ok
+    Content-Type: application/json
+    ResponseBody: {
+    "_id":"contactID",
+    "name":"example",
+    "email": "example@example.com",
+    "phone":"(099) 888-99-00",
+    "favorite":true
+    }
+```
+
+### Added pagination for contact collection (**_GET /contacts?page=1&limit=20_**).
+
+_**page** : page number_
+_**limit** : the number of contacts on the page_
+
+### Added filtering of contacts by the favorite field (**_GET /contacts?favorite=true_**)
