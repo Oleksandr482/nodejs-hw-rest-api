@@ -596,7 +596,7 @@ Request body: No content
 
 ### Added pagination for contact collection (**_GET /contacts?page=1&limit=20_**).
 
-_**page** : page number_
+_**page** : page number_  
 _**limit** : the number of contacts on the page_
 
 ### Added filtering of contacts by the favorite field (**_GET /contacts?favorite=true_**)
