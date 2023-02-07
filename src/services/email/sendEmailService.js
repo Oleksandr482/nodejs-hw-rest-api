@@ -10,14 +10,14 @@ const sendEmailService = async (email, token) => {
     port: 465,
     secure: true,
     auth: {
-      user: "oleksandr482@meta.ua",
+      user: process.env.EMAIL,
       pass: process.env.PASSWORD,
     },
   };
 
   const transporter = nodemailer.createTransport(config);
   const emailOptions = {
-    from: "oleksandr482@meta.ua",
+    from: process.env.EMAIL,
     to: email,
     subject: "Email verification",
     text: `Hello! You have registered for a very cool service. To verify your email, follow the link /users/verify/${token} . If you have not registered, please delete this message.`,
